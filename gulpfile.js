@@ -9,18 +9,19 @@ var gulp = require("gulp"),
   imagemin = require("gulp-imagemin"),
   sourcemaps = require("gulp-sourcemaps");
 
-gulp.task("default", [ "clean", "html", "css", "fonts", "img", "js"]);
+gulp.task("default", [
+  "clean",
+  "html",
+  "css",
+  "fonts",
+  "img",
+  "js"
+]);
+gulp.task("build", ["clean", "html", "css", "fonts", "img", "js"]);
 
-gulp.task("build", [ "clean", "html", "css", "fonts", "img", "js"]);
 
 
-gulp.task("watch", function() {
-  gulp.watch("./css/**/*.css", ["css"]);
-  gulp.watch("./html/**/*.html", ["html"]);
-  gulp.watch("./fonts/**/*.ttf", ["fonts"]);
-  gulp.watch("./img/**/*.+(png|img)", ["img"]);
-  gulp.watch("./js/**/*.js", ["build"]);
-});
+
 //Copy static files from html folder to build folder
 
 gulp.task("css", function() {
@@ -100,7 +101,17 @@ gulp.task("images", function() {
 gulp.task("startServer", function() {
   browserSync({
     server: {
-      baseDir: "build"
+      baseDir: "./build"
     }
   });
+  gulp.watch("./css/**/*.css", ["css"]);
+  gulp.watch("./html/**/*.html", ["html"]);
+  gulp.watch("./fonts/**/*.ttf", ["fonts"]);
+  gulp.watch("./img/**/*.+(png|img)", ["img"]);
+  gulp.watch("./js/**/*.js", ["js"]);
+   gulp.watch("./build/css/**/*.css").on("change", browserSync.reload);
+    gulp.watch("./build/html/**/*.htmll").on("change", browserSync.reload);
+     gulp.watch("./build/fonts/**/*.ttf").on("change", browserSync.reload);
+      gulp.watch("./build/img/**/*.+(png|img)").on("change", browserSync.reload);
+       gulp.watch("./build/js/**/*.js").on("change", browserSync.reload);
 });
