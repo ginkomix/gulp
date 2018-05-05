@@ -49,7 +49,7 @@ gulp.task("html", function() {
 
 gulp.task("fonts", function() {
   return gulp
-    .src("app/fonts/**/*.ttf")
+    .src("./fonts/**/*.ttf")
     .pipe(gulp.dest("build/fonts"))
     .pipe(
       browserSync.reload({
@@ -60,7 +60,7 @@ gulp.task("fonts", function() {
 
 gulp.task("img", function() {
   return gulp
-    .src("app/img/**/*.(png|img)")
+    .src("./img/**/*.(png|img)")
     .pipe(gulp.dest("build/img"))
     .pipe(
       browserSync.reload({
